@@ -4,7 +4,7 @@ import re
 
 error = list()
 
-mainUrl = 'https://www.myfooddiary.com'
+mainUrl = ' '
 directory = '/foods/brands'
 url = f'{mainUrl}{directory}'
 
