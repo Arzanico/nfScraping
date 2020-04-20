@@ -6,7 +6,8 @@ All de datas was scraped using three libraries :
   - BeautifulSoup
   - Re
   
-The results of scraping are availables as Json ready to export to Pandas DataFrame\n.
+The results of scraping are availables as **Json** ready to export to Pandas DataFrame.
+
 Missing Data are represented as None
 
-The scripts was coded on python 3.7
+The scripts was coded on **python 3.7**
