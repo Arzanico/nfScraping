@@ -1,7 +1,5 @@
 from bs4 import BeautifulSoup
-import pandas as pd
 import requests as rq
-import time
 import re
 
 error = list()
@@ -11,15 +9,16 @@ directory = '/foods/brands'
 url = f'{mainUrl}{directory}'
 
 r = rq.get(url)
-status = r.status_code # Estado de la conexion
+status = r.status_code 
 
+# Check for coonextion status to go on
 if status != 200:
     print("Respuesta desconocida")
     quit()
 
 soup = BeautifulSoup(r.content, 'html.parser')
 
-# Crear la lista de comercios
+# Brand lists
 
 brandsConteiner = soup.find("div", id="BrandListHldr") # Main container
 
@@ -29,12 +28,9 @@ for a in brandsConteiner.find_all("a"):
     link = f'{a["href"]}'
     brandMenuLinks.append({"brand":a.text , "href":link}) 
     #Por ahora lo voy a hacer asi pero mas delante con todos los datos tengo que hacer un diccionario por marca
-
-# Recorrido de la lista de los menus de cada marca. El objetivo es capturar los items del menu
-
-for i in brandMenuLinks[0:3]:
-    # <------- Inicialmente trabajo con un slice de la lista para testear el loop ------->
-    time.sleep(1)
+    
+# Iteration trought brands. The objetive is to get menu items.
+for i in brandMenuLinks[:
     link = f'{mainUrl}{i["href"]}'
     r = rq.get(link)
     status = r.status_code
@@ -51,7 +47,6 @@ for i in brandMenuLinks[0:3]:
     if len(menu) > 0:
         menuItems = list()
         for p in menu:
-            time.sleep(1)
             row = p.find("td", class_="FoodRowLt")
             if row == None:
                 continue
@@ -61,10 +56,9 @@ for i in brandMenuLinks[0:3]:
             menuItems.append({"idp":idP, "itemName":itemName, "href":itemUrl})  
     i.update({"menu":menuItems}) # Actualizacion de los datos en el diccionario
 
-# Proximo paso getNutritions facts
-for i in brandMenuLinks[0:3]:
-    # <------- Inicialmente trabajo con un slice de la lista para testear el loop ------->
-    # por cada item del menu de cada restaurnte tengo un diccionario donde debo agregar la informacion nutricional
+# Next step get Nutritions facts
+for i in brandMenuLinks:
+    # There I set a dictionary for each item on the menu wich will contain the nutritional data
     # la informacion nutricional tambien va a ser una lista de diccionarios
     for item in i["menu"]:
         # -> CONEXION al item
@@ -96,8 +90,8 @@ for i in brandMenuLinks[0:3]:
                 calories = f'Fail {calories}'
         # <- Salvo primeros datos -->
         #item.update({"nFacts":{"calories":calories, "netCarbs":netCarbs}})
-        # <- end -->
-        # <- Next -->
+# <- end -->
+# <- Next -->
         # Los divs de interes tinenen un id con el siguiente formato
         patt = "nf_((?!amount)(?!dv_note)(?!daily))[a-zA-Z_]*"
         # Lista de todos los divs con los datos
@@ -105,12 +99,11 @@ for i in brandMenuLinks[0:3]:
         # Loop de elementos dentro del conetenedor de informacion nutricional
         nutrients = list()
         for nf in nfContainers:
-            # print(f'**************')
             # Lista de tags en el contenedor
             tagsInNfC = nf.find_all(True) 
             if len(tagsInNfC):
-            #    print(f'Contenedor Anidado ***********')
                 nutrients.append(nFactData(nf))
             else:
                 continue
         item.update({"nFacts":{"calories":calories, "netCarbs":netCarbs, "facts":nutrients}})
+# <- end -->                        
