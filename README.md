@@ -2,7 +2,7 @@
 This is a sample proyect of a recursive **web scraping**.
 >This is only a sample, full scraping take a few hours to complete.
 
-![Sample of ofirst results](/blob/master/sample.png)
+![Sample of ofirst results](/sample.png)
 
 All de datas was extracted using three libraries :
   - Requests
