@@ -11,3 +11,5 @@ The results of scraping are availables as **Json** ready to export to Pandas Dat
 Missing Data are represented as None
 
 The scripts was coded on **python 3.7**
+
+Contact me: nclsarzani@gmail.com
