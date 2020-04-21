@@ -4,7 +4,7 @@ This is a sample proyect of a recursive **web scraping**.
 
 ![Sample of ofirst results](/sample.png)
 
-All de datas was extracted using three libraries :
+All data was extracted using three libraries :
   - Requests
   - BeautifulSoup
   - Re
