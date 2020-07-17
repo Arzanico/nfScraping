@@ -1,6 +1,6 @@
 ## nfScraping
-This is a sample proyect of a recursive **web scraping**.
->This is only a sample, full scraping take a few hours to complete.
+This is a sample proyect of a recursive **web scraping** using BeautifulSoup
+>The example below is only to get a picture of the results.
 
 ![Sample of ofirst results](/sample.png)
 
@@ -15,4 +15,4 @@ Missing Data are represented as None
 
 The script was coded on **python 3.7**
 
-Contact me: nclsarzani@gmail.com
+You can ontact me at: nclsarzani@gmail.com
